@@ -4,7 +4,7 @@
 /* AK7451 angle sensor basic usage example
 CButler. Oct 2023.
 
-Using Arduino Micro as MCB as sensor require 5V.
+Using Arduino Micro as MCB as sensor requires 5V.
 Pinout:
   AK7451:
   5V <-> 5V
@@ -29,5 +29,5 @@ void setup() {
 void loop() {
   float angle = ak7451.readAngle(); // read angle from sensor
   Serial.println(angle); // print angle to Serial Monitor
-  delay(1000); // wait 1 second between measurements 
+  delay(1000); // delay 1 second between measurements 
 }

@@ -61,15 +61,18 @@ class AK7451
  public:
   AK7451();
   void begin(int8_t chipSelectPin, SPIClass &spiPort = SPI);
+  void writeData(uint8_t opcode, uint8_t reg, uint16_t data);
   uint16_t readData(uint8_t opcode, uint8_t reg);
   float readAngle();
-  bool readErrorPin();
+  bool readErrorBit();
+  bool readModeBit();
+  float readMagFlux();
 
  private:
   uint8_t _cs;
   SPIClass *_spiPort;
   SPISettings _spiSettings;
-  uint16_t rawAngle; // raw angle value
+  uint16_t rawData; // raw angle value
 };
 
 #endif // AK7451_H

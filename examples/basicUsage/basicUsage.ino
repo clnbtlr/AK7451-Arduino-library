@@ -1,6 +1,3 @@
-#include <SPI.h>
-#include <Arduino.h>
-
 /* AK7451 angle sensor basic usage example
 CButler. Oct 2023.
 

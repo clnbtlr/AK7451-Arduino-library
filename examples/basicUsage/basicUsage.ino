@@ -4,7 +4,7 @@ CButler. Oct 2023.
 Using Arduino Micro as MCB as sensor requires 5V.
 Pinout:
   AK7451:
-  5V <-> 5V
+  5V <-> 5V // probably need to change this to do reset or set normal mode at start
   GND <-> GND
   SCK <-> SCK
   MI <-> SDO

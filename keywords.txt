@@ -1,0 +1,13 @@
+# Colour mapping for AK7451 library
+
+# Classes
+
+AK7451	KEYWORD1
+AK7451_Reg	KEYWORD1
+
+# Functions
+
+begin	KEYWORD2
+readData	KEYWORD2
+readAngle	KEYWORD2
+readErrorPin	KEYWORD2

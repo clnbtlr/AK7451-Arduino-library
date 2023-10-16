@@ -76,13 +76,15 @@ void AK7451::writeData(uint8_t opcode, uint8_t reg, uint16_t data)
 
 uint16_t AK7451::readData(uint8_t opcode, uint8_t reg)
 {
-  uint8_t txBuf = 0;
+  //uint8_t txBuf = 0;
+  uint8_t txBuf[2] = {0};
   uint8_t rxBuf[2] = {0,0};
   uint16_t rawData = 0;
 
   reg <<= 1; // register address is 7 bits
   //txBuf = ( opcode << 4 ) | ( reg >> 4 );
-  txBuf = ( opcode << 4 ) | ( reg ); 
+  txBuf[0] = ( opcode << 4 ) | ( reg >> 4 );
+  txBuf[1] = reg << 4;
 /* Mikro code sends unshifted reg using spi_master_set_default_write data()
 Default write data is sent by driver when the data transmit buffer is shorter than data receive buffer.
 https://docs.mikroe.com/mikrosdk/ref-manual/group__drvspigroup.html#ga42a4328d6681ba3d18f6754aef32845d
@@ -92,7 +94,8 @@ Still dont understand return data
   _spiPort->beginTransaction(_spiSettings);  
   digitalWrite(_cs, LOW);           // set pin low to start talking to IC
 
-  _spiPort->transfer(txBuf);       // transfer command
+  //_spiPort->transfer(txBuf);       // transfer command
+  _spiPort->transfer(txBuf,2);
   rxBuf[0] = _spiPort->transfer(0);   // read first byte of data from IC
   rxBuf[1] = _spiPort->transfer(0);   // read second byte of data from IC
 

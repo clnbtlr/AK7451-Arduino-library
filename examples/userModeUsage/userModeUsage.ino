@@ -27,7 +27,7 @@ void setup() {
   Serial.print(","); Serial.println(mode);
 
   delay(2000);
-  ak7451.writeData(0x05,0x02,0x050F); // write data to sensor (change to User Mode)
+  //ak7451.writeData(0x05,0x02,0x050F); // write data to sensor (change to User Mode)
   delay(100);
 }
 

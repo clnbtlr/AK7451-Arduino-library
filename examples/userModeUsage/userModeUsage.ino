@@ -36,7 +36,7 @@ void loop() {
   Serial.print(magFlux); // print angle to Serial Monitor
   bool mode = ak7451.readModeBit();
   Serial.print(","); Serial.print(mode);
-  uint16_t rawData = ak7451.readData(0x04,0x02);
+  uint16_t rawData = ak7451.readData(0x09,0x00);
   //rawData &= 0x0FFF;
   //rawData = rawData & 0xFFF;
   Serial.print(","); Serial.println(rawData,BIN);

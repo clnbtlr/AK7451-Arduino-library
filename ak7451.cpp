@@ -49,20 +49,26 @@ void AK7451::begin(int8_t chipSelectPin, SPIClass &spiPort)
 void AK7451::writeData(uint8_t opcode, uint8_t reg, uint16_t data)
 // seems to work but dnt understand return from reg
 {
-  //uint8_t txBuf[3] = {0,0,0};
+  uint8_t txBuf[3] = {0,0,0};
 
   reg <<= 1; // register address is 7 bits
 
-  uint8_t txBuf0 = ( opcode << 4 ) | ( reg >> 4 );
-  uint8_t txBuf1 = ( reg << 4 ) | (( data >> 8 ) & 0x0F );
-  uint8_t txBuf2 = data & 0xFF;
+  //uint8_t txBuf0 = ( opcode << 4 ) | ( reg >> 4 );
+  //uint8_t txBuf1 = ( reg << 4 ) | (( data >> 8 ) & 0x0F );
+  //uint8_t txBuf2 = data & 0xFF;
+
+  txBuf[0] = ( opcode << 4 ) | ( reg >> 4 );
+  txBuf[1] = ( reg << 4 ) | (( data >> 8 ) & 0x0F );
+  txBuf[2] = data & 0xFF;
 
   _spiPort->beginTransaction(_spiSettings);
   digitalWrite(_cs, LOW);           // set pin low to start talking to IC
   
-  _spiPort->transfer(txBuf0);       // transfer command
-  _spiPort->transfer(txBuf1);
-  _spiPort->transfer(txBuf2);
+  //_spiPort->transfer(txBuf0);       // transfer command
+  //_spiPort->transfer(txBuf1);
+  //_spiPort->transfer(txBuf2);
+
+  _spiPort->transfer(txBuf,3);
 
   digitalWrite(_cs, HIGH);          // set pin high to end SPI session
   _spiPort->endTransaction();
@@ -75,7 +81,13 @@ uint16_t AK7451::readData(uint8_t opcode, uint8_t reg)
   uint16_t rawData = 0;
 
   reg <<= 1; // register address is 7 bits
-  txBuf = ( opcode << 4 ) | ( reg >> 4 );
+  //txBuf = ( opcode << 4 ) | ( reg >> 4 );
+  txBuf = ( opcode << 4 ) | ( reg ); 
+/* Mikro code sends unshifted reg using spi_master_set_default_write data()
+Default write data is sent by driver when the data transmit buffer is shorter than data receive buffer.
+https://docs.mikroe.com/mikrosdk/ref-manual/group__drvspigroup.html#ga42a4328d6681ba3d18f6754aef32845d
+Still dont understand return data
+*/ 
 
   _spiPort->beginTransaction(_spiSettings);  
   digitalWrite(_cs, LOW);           // set pin low to start talking to IC

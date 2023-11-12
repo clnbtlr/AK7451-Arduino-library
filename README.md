@@ -14,3 +14,7 @@ The pinout for the connections is as follows:
 | MI   | SDO |
 | MO   | SDI | 
 | SS   | CS  |
+
+Currently only basic usage is implemented. This includes reading the absolute angle data, error and mode bits in Normal Mode (see the AK7451 datasheet for more details). User Mode is a work in progress.
+
+Library installation in Arduino IDE is per the usual manner.

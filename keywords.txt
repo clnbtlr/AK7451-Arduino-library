@@ -10,4 +10,6 @@ AK7451_Reg	KEYWORD1
 begin	KEYWORD2
 readData	KEYWORD2
 readAngle	KEYWORD2
-readErrorPin	KEYWORD2
+readErrorBit	KEYWORD2
+readModeBit	KEYWORD2
+readMagFlux KEYWORD2
